@@ -1,4 +1,7 @@
-import { clerkMiddleware } from '@clerk/nextjs/server';
+// Clerk는 선택적 (환경 변수가 있을 때만 사용)
+const clerkMiddleware = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+  ? require('@clerk/nextjs/server').clerkMiddleware
+  : () => (req: any) => req
 
 export default clerkMiddleware();
 

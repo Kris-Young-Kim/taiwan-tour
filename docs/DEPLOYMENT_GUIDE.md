@@ -223,18 +223,33 @@ Code: DEPLOYMENT_NOT_FOUND
 
 **해결 방법:**
 
-1. **리전 설정 확인**
-   - `vercel.json`에서 `regions` 설정이 올바른지 확인
-   - 잘못된 리전 코드는 제거하거나 Vercel 기본 리전 사용
+1. **Vercel 대시보드에서 리전 설정 확인 및 변경** (가장 중요!)
+   - Vercel 대시보드 → 프로젝트 → Settings → Functions
+   - "Function Region" 또는 "Edge Network" 설정 확인
+   - `icn1` (서울) 리전이 설정되어 있다면:
+     - "Default Region"을 "Auto" 또는 다른 리전으로 변경
+     - 또는 리전 설정을 완전히 제거하여 Vercel이 자동 선택하도록 설정
+   - 변경 후 저장
+
+2. **vercel.json 확인**
+   - `vercel.json`에서 `regions` 설정이 있는지 확인
+   - 잘못된 리전 코드(`icn1` 등)가 있다면 제거
    - Next.js는 Vercel이 자동으로 최적의 리전을 선택합니다
 
-2. **배포 상태 확인**
+3. **배포 상태 확인**
    - Vercel 대시보드 → Deployments에서 배포 상태 확인
    - 배포가 실패했거나 삭제되었는지 확인
+   - 실패한 배포가 있다면 삭제
 
-3. **재배포**
-   - 새로운 배포를 트리거하여 문제 해결
-   - GitHub에 push하거나 Vercel 대시보드에서 "Redeploy" 클릭
+4. **재배포**
+   - Vercel 대시보드에서 "Redeploy" 클릭
+   - 또는 GitHub에 push하여 자동 재배포 트리거
+   - 새로운 배포가 성공적으로 완료되는지 확인
+
+**참고:**
+- `icn1` (서울) 리전은 일부 Vercel 플랜에서 사용 불가능할 수 있습니다
+- 리전 설정을 제거하면 Vercel이 자동으로 최적의 리전을 선택합니다
+- 대부분의 경우 자동 선택이 더 안정적입니다
 
 ### 빌드 실패
 

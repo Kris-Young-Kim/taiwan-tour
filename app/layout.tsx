@@ -1,9 +1,13 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
-import { ClerkProvider } from "@clerk/nextjs"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
+
+// Clerk는 선택적 (환경 변수가 있을 때만 사용)
+const ClerkProvider = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+  ? require("@clerk/nextjs").ClerkProvider
+  : ({ children }: { children: React.ReactNode }) => <>{children}</>
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

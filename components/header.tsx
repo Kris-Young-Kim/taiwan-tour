@@ -4,13 +4,15 @@ import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
-import {
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs"
+
+// Clerk는 선택적 (환경 변수가 있을 때만 사용)
+const hasClerk = typeof window !== "undefined" && process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+
+const SignInButton = hasClerk ? require("@clerk/nextjs").SignInButton : () => null
+const SignUpButton = hasClerk ? require("@clerk/nextjs").SignUpButton : () => null
+const SignedIn = hasClerk ? require("@clerk/nextjs").SignedIn : ({ children }: { children: React.ReactNode }) => null
+const SignedOut = hasClerk ? require("@clerk/nextjs").SignedOut : ({ children }: { children: React.ReactNode }) => <>{children}</>
+const UserButton = hasClerk ? require("@clerk/nextjs").UserButton : () => null
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
