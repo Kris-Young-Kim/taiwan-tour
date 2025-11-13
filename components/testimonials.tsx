@@ -1,5 +1,8 @@
+"use client"
+
 import { Card, CardContent } from "@/components/ui/card"
-import { Star } from "lucide-react"
+import { Star, Share2 } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 export default function Testimonials() {
   const testimonials = [
@@ -57,6 +60,60 @@ export default function Testimonials() {
               </CardContent>
             </Card>
           ))}
+        </div>
+
+        {/* SNS Share Section */}
+        <div className="mt-16 pt-12 border-t border-border">
+          <div className="text-center mb-8">
+            <h3 className="text-2xl font-bold mb-2">친구들과 여행을 공유하세요</h3>
+            <p className="text-foreground/70">이 특별한 여행을 더 많은 사람들과 함께하세요</p>
+          </div>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Button
+              variant="outline"
+              className="gap-2"
+              onClick={() => {
+                const url = typeof window !== "undefined" ? window.location.href : ""
+                const text = "대만 타이베이 3박 4일 특별 여행 - 민투어"
+                const kakaoUrl = `https://story.kakao.com/share?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`
+                window.open(kakaoUrl, "_blank")
+              }}
+            >
+              <Share2 size={18} />
+              카카오톡 공유
+            </Button>
+            <Button
+              variant="outline"
+              className="gap-2"
+              onClick={() => {
+                const url = typeof window !== "undefined" ? window.location.href : ""
+                const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`
+                window.open(facebookUrl, "_blank")
+              }}
+            >
+              <Share2 size={18} />
+              페이스북 공유
+            </Button>
+            <Button
+              variant="outline"
+              className="gap-2"
+              onClick={() => {
+                const url = typeof window !== "undefined" ? window.location.href : ""
+                const text = "대만 타이베이 3박 4일 특별 여행 - 민투어"
+                const instagramUrl = `https://www.instagram.com/`
+                // Instagram은 직접 공유가 제한적이므로 URL 복사 안내
+                if (navigator.clipboard) {
+                  navigator.clipboard.writeText(url)
+                  alert("링크가 클립보드에 복사되었습니다. 인스타그램에 붙여넣기 하세요.")
+                } else {
+                  window.open(instagramUrl, "_blank")
+                }
+              }}
+            >
+              <Share2 size={18} />
+              인스타그램 공유
+            </Button>
+          </div>
         </div>
       </div>
     </section>

@@ -33,7 +33,7 @@ export default function PriceSection() {
             <CardContent className="space-y-4">
               <div className="flex justify-between items-baseline pb-4 border-b border-border/50">
                 <span className="text-foreground/80">기본 요금 (1인)</span>
-                <span className="text-3xl font-bold text-primary">₩1,290,000</span>
+                <span className="text-3xl font-bold text-primary">₩1,350,000</span>
               </div>
               <div className="flex justify-between items-baseline pb-4 border-b border-border/50">
                 <span className="text-foreground/80">싱글룸 추가 (3박)</span>
@@ -43,7 +43,7 @@ export default function PriceSection() {
                 <p className="text-sm text-foreground/70">
                   <span className="font-semibold">예: 2명 더블룸</span>
                   <br />
-                  ₩1,290,000 × 2 = ₩2,580,000
+                  ₩1,350,000 × 2 = ₩2,700,000
                 </p>
               </div>
             </CardContent>
