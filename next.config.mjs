@@ -23,8 +23,6 @@ const nextConfig = {
   },
   // 압축 활성화
   compress: true,
-  // 프로덕션 빌드 최적화
-  swcMinify: true,
   // React Strict Mode
   reactStrictMode: true,
   // 헤더 설정 (캐싱 전략)
