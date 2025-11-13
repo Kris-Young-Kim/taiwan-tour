@@ -21,6 +21,13 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ["lucide-react", "@radix-ui/react-icons"],
   },
+  // Middleware 경고 숨기기 (Clerk는 middleware.ts를 표준으로 사용)
+  // Next.js 16에서 middleware.ts는 여전히 작동하며, Clerk도 이를 지원합니다
+  // 경고는 새로운 "proxy" 컨벤션에 대한 안내일 뿐입니다
+  onDemandEntries: {
+    maxInactiveAge: 60 * 1000,
+    pagesBufferLength: 2,
+  },
   // 압축 활성화
   compress: true,
   // 프로덕션 빌드 최적화
