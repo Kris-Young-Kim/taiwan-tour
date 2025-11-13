@@ -66,24 +66,65 @@ vercel --prod
 
 5. 환경 변수 설정:
    - Settings → Environment Variables
-   - 모든 환경 변수 추가
+   - 모든 환경 변수 추가 (아래 참고)
 
 6. "Deploy" 클릭
 
 ### 환경 변수 설정
 
-Vercel 대시보드에서 다음 환경 변수를 설정하세요:
+**중요**: Vercel 대시보드에서 다음 환경 변수를 **직접 설정**해야 합니다.
+
+1. Vercel 프로젝트 → Settings → Environment Variables
+2. 각 환경 변수를 추가:
+
+#### 필수 환경 변수
 
 ```
-NEXT_PUBLIC_SITE_URL=https://your-domain.com
-GOOGLE_SERVICE_ACCOUNT_EMAIL=your-service-account@project.iam.gserviceaccount.com
-GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
-GOOGLE_SPREADSHEET_ID=your-spreadsheet-id
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
-CLERK_SECRET_KEY=sk_test_...
+NEXT_PUBLIC_SITE_URL
 ```
+- **Value**: 프로덕션 사이트 URL
+  - 예: `https://your-project.vercel.app` (Vercel 기본 도메인)
+  - 또는: `https://mintour.com` (커스텀 도메인 사용 시)
+- **Environment**: Production, Preview, Development 모두 선택
 
-**주의**: `GOOGLE_PRIVATE_KEY`는 여러 줄이므로 따옴표로 감싸고 `\n`을 포함해야 합니다.
+```
+GOOGLE_SERVICE_ACCOUNT_EMAIL
+```
+- **Value**: Google 서비스 계정 이메일
+- **Environment**: Production, Preview, Development 모두 선택
+
+```
+GOOGLE_PRIVATE_KEY
+```
+- **Value**: Google 서비스 계정 개인 키 (전체 키 포함)
+  - `-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n` 형식
+  - 여러 줄이므로 따옴표로 감싸고 `\n`을 포함해야 합니다
+- **Environment**: Production, Preview, Development 모두 선택
+
+```
+GOOGLE_SPREADSHEET_ID
+```
+- **Value**: Google Spreadsheet ID
+- **Environment**: Production, Preview, Development 모두 선택
+
+#### 선택적 환경 변수 (Clerk 사용 시)
+
+```
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+```
+- **Value**: Clerk Publishable Key (예: `pk_test_...`)
+- **Environment**: Production, Preview, Development 모두 선택
+
+```
+CLERK_SECRET_KEY
+```
+- **Value**: Clerk Secret Key (예: `sk_test_...`)
+- **Environment**: Production, Preview, Development 모두 선택
+
+**주의사항:**
+- `GOOGLE_PRIVATE_KEY`는 여러 줄이므로 따옴표로 감싸고 `\n`을 포함해야 합니다
+- 환경 변수 추가 후 **반드시 재배포**해야 적용됩니다
+- `NEXT_PUBLIC_` 접두사가 붙은 변수는 클라이언트에서도 접근 가능합니다
 
 ---
 
