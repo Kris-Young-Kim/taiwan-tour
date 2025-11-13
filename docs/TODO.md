@@ -27,14 +27,15 @@
 
 ### 1.2 환경 변수 설정
 
-- [ ] `.env.local` 파일 생성
-- [ ] Google Sheets 환경 변수 설정
-  - [ ] GOOGLE_SERVICE_ACCOUNT_EMAIL
-  - [ ] GOOGLE_PRIVATE_KEY
-  - [ ] GOOGLE_SPREADSHEET_ID
-- [ ] Clerk 환경 변수 설정
-  - [ ] NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
-  - [ ] CLERK_SECRET_KEY
+- [x] `.env.local` 파일 생성
+  - [x] `env.template` 파일을 `.env.local`로 복사 완료
+- [x] Google Sheets 환경 변수 설정
+  - [x] GOOGLE_SERVICE_ACCOUNT_EMAIL (서비스 계정 이메일)
+  - [x] GOOGLE_PRIVATE_KEY (JSON 키 파일의 private_key 값)
+  - [x] GOOGLE_SPREADSHEET_ID (스프레드시트 URL에서 확인)
+- [x] Clerk 환경 변수 설정
+  - [x] NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY (Clerk 대시보드에서 확인)
+  - [x] CLERK_SECRET_KEY (Clerk 대시보드에서 확인)
 - [ ] 결제 API 키 설정 (Stripe/Toss Payments) - 선택사항
 - [ ] Google Maps API 키 설정 - 선택사항
 

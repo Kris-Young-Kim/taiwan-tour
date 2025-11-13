@@ -1,43 +1,50 @@
 import { type NextRequest, NextResponse } from "next/server"
+import { createBooking, getAllBookings } from "@/lib/db"
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
 
-    console.log("[v0] Booking received:", body)
+    console.log("[API] 예약 요청 수신:", body)
 
-    // Validate required fields
-    if (!body.nameKo || !body.email || !body.guests) {
-      return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
+    // 필수 필드 검증
+    if (!body.userEmail || !body.totalGuests || body.totalAmount === undefined) {
+      return NextResponse.json(
+        { error: "필수 필드가 누락되었습니다: userEmail, totalGuests, totalAmount" },
+        { status: 400 }
+      )
     }
 
-    // Generate booking number
-    const bookingNumber = `BK${Date.now()}`
-
-    // Calculate total amount
-    const basePrice = 1_350_000
-    const singleRoomPrice = 330_000
-    const totalAmount = basePrice * body.guests + singleRoomPrice * (body.singleRooms || 0)
-
-    // Mock database insertion
-    const booking = {
-      id: Math.random().toString(36).substr(2, 9),
-      bookingNumber,
-      nameKo: body.nameKo,
-      email: body.email,
-      guests: body.guests,
+    // 예약 데이터 준비
+    const bookingData = {
+      packageId: body.packageId || "1", // 기본 패키지 ID
+      userEmail: body.userEmail,
+      totalGuests: body.totalGuests,
       singleRooms: body.singleRooms || 0,
-      totalAmount,
-      paymentStatus: "pending",
-      createdAt: new Date().toISOString(),
+      totalAmount: body.totalAmount,
+      paymentStatus: body.paymentStatus || "pending",
+      paymentMethod: body.paymentMethod || "",
+      guests: body.guests || [],
+      rooms: body.rooms || [],
+      checkInDate: body.checkInDate || "2026-06-13",
+      checkOutDate: body.checkOutDate || "2026-06-16",
     }
 
-    console.log("[v0] Booking created:", booking)
+    // Google Sheets에 예약 생성
+    const booking = await createBooking(bookingData)
+
+    console.log("[API] 예약 생성 완료:", booking)
 
     return NextResponse.json(booking, { status: 201 })
-  } catch (error) {
-    console.error("[v0] Booking error:", error)
-    return NextResponse.json({ error: "Failed to create booking" }, { status: 500 })
+  } catch (error: any) {
+    console.error("[API] 예약 생성 오류:", error)
+    return NextResponse.json(
+      { 
+        error: "예약 생성 실패",
+        message: error.message || "알 수 없는 오류가 발생했습니다"
+      },
+      { status: 500 }
+    )
   }
 }
 
@@ -47,25 +54,30 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url)
     const email = searchParams.get("email")
 
-    console.log("[v0] Fetching bookings for email:", email)
+    console.log("[API] 예약 조회 요청:", email)
 
-    // Mock database query
-    const mockBookings = [
-      {
-        id: "1",
-        bookingNumber: "BK001",
-        email: email,
-        guests: 2,
-        singleRooms: 0,
-        totalAmount: 2_700_000,
-        paymentStatus: "completed",
-        createdAt: new Date().toISOString(),
+    // Google Sheets에서 예약 목록 조회
+    const bookings = await getAllBookings()
+
+    // 이메일로 필터링 (선택사항)
+    let filteredBookings = bookings
+    if (email) {
+      filteredBookings = bookings.filter(
+        (booking: any) => booking.user_email === email || booking.userEmail === email
+      )
+    }
+
+    console.log("[API] 예약 조회 완료:", filteredBookings.length, "건")
+
+    return NextResponse.json(filteredBookings)
+  } catch (error: any) {
+    console.error("[API] 예약 조회 오류:", error)
+    return NextResponse.json(
+      { 
+        error: "예약 조회 실패",
+        message: error.message || "알 수 없는 오류가 발생했습니다"
       },
-    ]
-
-    return NextResponse.json(mockBookings)
-  } catch (error) {
-    console.error("[v0] Fetch error:", error)
-    return NextResponse.json({ error: "Failed to fetch bookings" }, { status: 500 })
+      { status: 500 }
+    )
   }
 }

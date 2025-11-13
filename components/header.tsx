@@ -4,6 +4,13 @@ import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
+import {
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs"
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
@@ -38,11 +45,37 @@ export default function Header() {
           ))}
         </div>
 
-        <div className="hidden md:flex gap-2">
+        <div className="hidden md:flex items-center gap-2">
           <Button variant="outline" className="text-sm bg-transparent">
             문의
           </Button>
-          <Button className="text-sm bg-primary hover:bg-primary/90">지금 예약하기</Button>
+          <SignedOut>
+            <SignInButton mode="modal">
+              <Button variant="outline" className="text-sm">
+                로그인
+              </Button>
+            </SignInButton>
+            <SignUpButton mode="modal">
+              <Button className="text-sm bg-primary hover:bg-primary/90">
+                회원가입
+              </Button>
+            </SignUpButton>
+          </SignedOut>
+          <SignedIn>
+            <UserButton afterSignOutUrl="/" />
+            <Link href="/booking">
+              <Button className="text-sm bg-primary hover:bg-primary/90">
+                지금 예약하기
+              </Button>
+            </Link>
+          </SignedIn>
+          <SignedOut>
+            <Link href="/booking">
+              <Button className="text-sm bg-primary hover:bg-primary/90">
+                지금 예약하기
+              </Button>
+            </Link>
+          </SignedOut>
         </div>
 
         {/* Mobile Menu Button */}
@@ -72,7 +105,28 @@ export default function Header() {
                 <Button variant="outline" className="w-full text-sm bg-transparent">
                   문의
                 </Button>
-                <Button className="w-full text-sm bg-primary hover:bg-primary/90">지금 예약하기</Button>
+                <SignedOut>
+                  <SignInButton mode="modal">
+                    <Button variant="outline" className="w-full text-sm">
+                      로그인
+                    </Button>
+                  </SignInButton>
+                  <SignUpButton mode="modal">
+                    <Button className="w-full text-sm bg-primary hover:bg-primary/90">
+                      회원가입
+                    </Button>
+                  </SignUpButton>
+                </SignedOut>
+                <SignedIn>
+                  <div className="flex items-center justify-center py-2">
+                    <UserButton afterSignOutUrl="/" />
+                  </div>
+                </SignedIn>
+                <Link href="/booking">
+                  <Button className="w-full text-sm bg-primary hover:bg-primary/90">
+                    지금 예약하기
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>

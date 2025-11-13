@@ -1,44 +1,67 @@
 import { type NextRequest, NextResponse } from "next/server"
+import { getAdminStats, getAllBookings } from "@/lib/db"
 
 export async function GET(request: NextRequest) {
   try {
-    console.log("[v0] Fetching admin statistics")
+    console.log("[API] 관리자 통계 조회 요청")
 
-    // Mock statistics data
-    const stats = {
-      totalGuests: 142,
-      maxCapacity: 150,
-      remainingSeats: 8,
-      bookingRate: 94.7,
-      totalRevenue: 191_700_000,
-      advancedPayment: 95_800_000,
-      pendingPayment: 95_900_000,
-      totalBookings: 142,
-      pendingPayments: 8,
-      cancelledBookings: 2,
-      revenueByDay: [
-        { date: "2026-06-13", amount: 2_700_000, guests: 2 },
-        { date: "2026-06-14", amount: 5_400_000, guests: 4 },
-        { date: "2026-06-15", amount: 8_100_000, guests: 6 },
-        { date: "2026-06-16", amount: 2_700_000, guests: 2 },
-      ],
-      roomDistribution: {
-        double: 68,
-        single: 32,
-        other: 42,
-      },
+    // Google Sheets에서 통계 데이터 조회
+    const stats = await getAdminStats()
+    const bookings = await getAllBookings()
+
+    // 추가 통계 계산
+    const maxCapacity = 150
+    const remainingSeats = Math.max(0, maxCapacity - stats.totalGuests)
+    const bookingRate = maxCapacity > 0 ? (stats.totalGuests / maxCapacity) * 100 : 0
+
+    // 객실 분포 계산
+    const roomDistribution = {
+      double: 0,
+      single: 0,
+    }
+
+    bookings.forEach((booking: any) => {
+      const singleRooms = parseInt(booking.single_rooms || booking.singleRooms || "0", 10)
+      const totalGuests = parseInt(booking.total_guests || booking.totalGuests || "0", 10)
+      const doubleRooms = Math.ceil((totalGuests - singleRooms) / 2)
+      
+      roomDistribution.double += doubleRooms
+      roomDistribution.single += singleRooms
+    })
+
+    const result = {
+      totalGuests: stats.totalGuests,
+      maxCapacity,
+      remainingSeats,
+      bookingRate: Math.round(bookingRate * 10) / 10,
+      totalRevenue: stats.totalRevenue,
+      advancedPayment: stats.completedPayments > 0 ? stats.totalRevenue * 0.5 : 0, // 예시
+      pendingPayment: stats.pendingPayments > 0 ? stats.totalRevenue * 0.5 : 0, // 예시
+      totalBookings: stats.totalBookings,
+      pendingPayments: stats.pendingPayments,
+      completedPayments: stats.completedPayments,
+      cancelledBookings: 0, // 추후 구현
+      roomDistribution,
       costs: {
-        flights: 84_200_000,
-        hotel: 50_100_000,
-        transport: 35_400_000,
-        entrance: 16_800_000,
-        other: 5_200_000,
+        flights: 0, // 추후 구현
+        hotel: 0, // 추후 구현
+        transport: 0, // 추후 구현
+        entrance: 0, // 추후 구현
+        other: 0, // 추후 구현
       },
     }
 
-    return NextResponse.json(stats)
-  } catch (error) {
-    console.error("[v0] Stats error:", error)
-    return NextResponse.json({ error: "Failed to fetch statistics" }, { status: 500 })
+    console.log("[API] 관리자 통계 조회 완료")
+
+    return NextResponse.json(result)
+  } catch (error: any) {
+    console.error("[API] 통계 조회 오류:", error)
+    return NextResponse.json(
+      { 
+        error: "통계 조회 실패",
+        message: error.message || "알 수 없는 오류가 발생했습니다"
+      },
+      { status: 500 }
+    )
   }
 }
