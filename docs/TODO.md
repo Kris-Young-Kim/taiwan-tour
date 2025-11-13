@@ -58,25 +58,25 @@
 
 ### 2.1 Google Spreadsheet 프로젝트 생성
 
-- [ ] Google Spreadsheet 생성
-- [ ] 스프레드시트 ID 확인
-- [ ] Google Cloud 프로젝트 생성
-- [ ] Google Sheets API 활성화
-- [ ] 서비스 계정 생성 및 키 다운로드
-- [ ] 스프레드시트에 서비스 계정 공유 (편집자 권한)
+- [x] Google Spreadsheet 생성
+- [x] 스프레드시트 ID 확인
+- [x] Google Cloud 프로젝트 생성
+- [x] Google Sheets API 활성화
+- [x] 서비스 계정 생성 및 키 다운로드
+- [x] 스프레드시트에 서비스 계정 공유 (편집자 권한)
 
 ### 2.2 시트(Sheet) 생성
 
-- [ ] `Packages` 시트 생성 및 헤더 입력
-- [ ] `Bookings` 시트 생성 및 헤더 입력
-- [ ] `Guests` 시트 생성 및 헤더 입력
-- [ ] `Rooms` 시트 생성 및 헤더 입력
-- [ ] `Payments` 시트 생성 및 헤더 입력
+- [x] `Packages` 시트 생성 및 헤더 입력
+- [x] `Bookings` 시트 생성 및 헤더 입력
+- [x] `Guests` 시트 생성 및 헤더 입력
+- [x] `Rooms` 시트 생성 및 헤더 입력
+- [x] `Payments` 시트 생성 및 헤더 입력
 - [ ] `Itineraries` 시트 생성 및 헤더 입력 (선택사항)
 
 ### 2.3 초기 데이터 입력
 
-- [ ] Packages 시트에 여행 패키지 정보 입력
+- [x] Packages 시트에 여행 패키지 정보 입력
 - [ ] Itineraries 시트에 일정 데이터 입력 (Day 1-4) - 선택사항
 
 ---
