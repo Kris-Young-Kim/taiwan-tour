@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Wifi, Dumbbell, UtensilsCrossed, Phone, Car, Lock, Wind, Shower } from "lucide-react"
+import { Wifi, Dumbbell, UtensilsCrossed, Phone, Car, Lock, Wind, ShowerHead } from "lucide-react"
 
 export default function HotelDetails() {
   const facilities = [
@@ -14,7 +14,7 @@ export default function HotelDetails() {
     { icon: Wind, name: "에어컨" },
     { icon: UtensilsCrossed, name: "미니바" },
     { icon: Lock, name: "안전금고" },
-    { icon: Shower, name: "욕실 어메니티" },
+    { icon: ShowerHead, name: "욕실 어메니티" },
   ]
 
   const hotelImages = [
