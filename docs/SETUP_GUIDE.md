@@ -140,7 +140,7 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 
 | id | name | description | duration_days | departure_date | return_date | base_price | single_room_price | max_guests | current_guests | status | created_at | updated_at |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | 글로벌트리브 로타리 세계대회 특별 투어 | 세계 4대 박물관과 타이베이의 정취를 느끼는 특별한 여행 | 4 | 2026-06-13 | 2026-06-16 | 1350000 | 330000 | 150 | 0 | active | 2025-01-01T00:00:00Z | 2025-01-01T00:00:00Z |
+| 1 | 글로벌트리브 로타리 세계대회 특별 투어 | 세계 4대 박물관과 타이베이의 정취를 느끼는 특별한 여행 | 4 | 2026-06-13 | 2026-06-16 | 1290000 | 330000 | 150 | 0 | active | 2025-01-01T00:00:00Z | 2025-01-01T00:00:00Z |
 
 ### 5.2 헤더 행 확인
 

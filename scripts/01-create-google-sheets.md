@@ -37,9 +37,9 @@
 2. 시트 이름을 "Packages"로 변경
 3. 첫 번째 행에 다음 헤더 입력:
 
-| id | name | description | duration_days | departure_date | return_date | base_price | single_room_price | max_guests | current_guests | status | created_at | updated_at |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| | 글로벌트리브 로타리 세계대회 특별 투어 | 세계 4대 박물관과 타이베이의 정취를 느끼는 특별한 여행 | 4 | 2026-06-13 | 2026-06-16 | 1350000 | 330000 | 150 | 0 | active | | |
+| id  | name                                   | description                                            | duration_days | departure_date | return_date | base_price | single_room_price | max_guests | current_guests | status | created_at | updated_at |
+| --- | -------------------------------------- | ------------------------------------------------------ | ------------- | -------------- | ----------- | ---------- | ----------------- | ---------- | -------------- | ------ | ---------- | ---------- |
+|     | 글로벌트리브 로타리 세계대회 특별 투어 | 세계 4대 박물관과 타이베이의 정취를 느끼는 특별한 여행 | 4             | 2026-06-13     | 2026-06-16  | 1290000    | 330000            | 150        | 0              | active |            |            |
 
 4. 두 번째 행에 샘플 데이터 입력 (위 표 참고)
 
@@ -49,7 +49,7 @@
 2. 첫 번째 행에 다음 헤더 입력:
 
 | booking_number | package_id | user_email | total_guests | single_rooms | total_amount | payment_status | payment_method | booking_date | created_at | updated_at |
-|---|---|---|---|---|---|---|---|---|---|---|
+| -------------- | ---------- | ---------- | ------------ | ------------ | ------------ | -------------- | -------------- | ------------ | ---------- | ---------- |
 
 ### 2.3 Guests 시트
 
@@ -57,7 +57,7 @@
 2. 첫 번째 행에 다음 헤더 입력:
 
 | booking_number | name_ko | name_en | birth_date | gender | passport_number | passport_expiry | phone | email | dietary_restrictions | medical_info | special_requests | is_primary | created_at |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| -------------- | ------- | ------- | ---------- | ------ | --------------- | --------------- | ----- | ----- | -------------------- | ------------ | ---------------- | ---------- | ---------- |
 
 ### 2.4 Rooms 시트
 
@@ -65,7 +65,7 @@
 2. 첫 번째 행에 다음 헤더 입력:
 
 | booking_number | room_type | room_number | guest_ids | check_in_date | check_out_date | created_at |
-|---|---|---|---|---|---|---|
+| -------------- | --------- | ----------- | --------- | ------------- | -------------- | ---------- |
 
 ### 2.5 Payments 시트
 
@@ -73,7 +73,7 @@
 2. 첫 번째 행에 다음 헤더 입력:
 
 | booking_number | amount | payment_method | payment_status | transaction_id | installments | paid_at | refunded_at | created_at | updated_at |
-|---|---|---|---|---|---|---|---|---|---|
+| -------------- | ------ | -------------- | -------------- | -------------- | ------------ | ------- | ----------- | ---------- | ---------- |
 
 ### 2.6 Itineraries 시트 (선택사항)
 
@@ -81,7 +81,7 @@
 2. 첫 번째 행에 다음 헤더 입력:
 
 | package_id | day_number | title | description | activities | breakfast | lunch | dinner | hotel | created_at |
-|---|---|---|---|---|---|---|---|---|---|
+| ---------- | ---------- | ----- | ----------- | ---------- | --------- | ----- | ------ | ----- | ---------- |
 
 ---
 
@@ -176,6 +176,7 @@ GOOGLE_SPREADSHEET_ID=your_spreadsheet_id_here
 ```
 
 **중요 사항:**
+
 - `GOOGLE_PRIVATE_KEY`는 JSON 파일의 `private_key` 값을 그대로 복사하세요
 - 줄바꿈 문자(`\n`)가 포함되어 있어야 합니다
 - 큰따옴표로 감싸야 합니다
@@ -223,4 +224,3 @@ GOOGLE_SPREADSHEET_ID=your_spreadsheet_id_here
 
 1. **패키지 데이터 입력** - Packages 시트에 여행 패키지 정보 입력
 2. **테스트** - 개발 서버 실행 후 예약 생성 테스트
-

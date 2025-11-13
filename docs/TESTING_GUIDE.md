@@ -113,7 +113,7 @@ curl -X POST http://localhost:3000/api/bookings \
   -d '{
     "userEmail": "test@example.com",
     "totalGuests": 2,
-    "totalAmount": 2700000,
+    "totalAmount": 2580000,
     "guests": [
       {
         "nameKo": "홍길동",

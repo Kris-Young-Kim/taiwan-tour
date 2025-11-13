@@ -20,7 +20,7 @@ export default function BookingsTable() {
       roomType: "더블룸",
       status: "예약완료",
       date: "2025-11-10",
-      amount: "₩2,700,000",
+      amount: "₩2,580,000",
     },
     {
       id: "BK002",
@@ -31,7 +31,7 @@ export default function BookingsTable() {
       roomType: "더블+싱글",
       status: "결제대기",
       date: "2025-11-12",
-      amount: "₩4,380,000",
+      amount: "₩4,200,000",
     },
     {
       id: "BK003",
@@ -42,7 +42,7 @@ export default function BookingsTable() {
       roomType: "싱글룸",
       status: "예약완료",
       date: "2025-11-08",
-      amount: "₩1,680,000",
+      amount: "₩1,620,000",
     },
     {
       id: "BK004",
@@ -53,7 +53,7 @@ export default function BookingsTable() {
       roomType: "더블 2실",
       status: "예약완료",
       date: "2025-11-13",
-      amount: "₩5,400,000",
+      amount: "₩5,160,000",
     },
     {
       id: "BK005",
@@ -64,7 +64,7 @@ export default function BookingsTable() {
       roomType: "더블룸",
       status: "취소",
       date: "2025-11-07",
-      amount: "₩2,700,000",
+      amount: "₩2,580,000",
     },
   ]
 

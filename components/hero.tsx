@@ -125,7 +125,7 @@ export default function Hero() {
               <span className="text-xs sm:text-sm text-foreground/60">함께하는 여행</span>
             </div>
             <div className="flex flex-col items-center gap-2">
-              <span className="text-2xl sm:text-3xl font-bold text-accent">₩1,350,000</span>
+              <span className="text-2xl sm:text-3xl font-bold text-accent">₩1,290,000</span>
               <span className="text-xs sm:text-sm text-foreground/60">1인 요금</span>
             </div>
           </motion.div>

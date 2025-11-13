@@ -88,7 +88,7 @@
 - duration_days: 4
 - departure_date: 2026-06-13
 - return_date: 2026-06-16
-- base_price: 1350000
+- base_price: 1290000
 - single_room_price: 330000
 - max_guests: 150
 - current_guests: 0

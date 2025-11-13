@@ -18,7 +18,7 @@ export default function BookingPage() {
   const [guests, setGuests] = useState(1)
   const [singleRooms, setSingleRooms] = useState(0)
 
-  const BASE_PRICE = 1_350_000
+  const BASE_PRICE = 1_290_000
   const SINGLE_ROOM_PRICE = 330_000
 
   const totalPrice = BASE_PRICE * guests + SINGLE_ROOM_PRICE * singleRooms
